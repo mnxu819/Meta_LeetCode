@@ -47,3 +47,24 @@ class Solution {
         return -1;
     }
 }
+/***************************************************************************************/
+Has duplicate numbers
+Example 1:
+
+Input: nums = [2,5,6,0,0,1,2], target = 0
+Output: true
+Example 2:
+
+Input: nums = [2,5,6,0,0,1,2], target = 3
+Output: false
+Worst case O(N)
+class Solution {
+    public boolean search(int[] nums, int target) {
+         for (int i = 0; i < nums.length; i ++) {
+            if (nums[i] == target) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
