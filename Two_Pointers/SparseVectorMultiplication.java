@@ -54,3 +54,43 @@ public class SparseVectorMultiplication {
         return product;
     }
 }
+
+/****************************************************************************************************/
+class SparseVector {
+    int[][] sparse;
+    SparseVector(int[] nums) {
+        LinkedList<Integer> list = new LinkedList<>();
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] != 0) {
+                list.add(i);
+            }
+        }
+        sparse = new int[list.size()][2];
+        int idx = 0;
+        for(Integer i : list) {
+            sparse[idx][0] = i;
+            sparse[idx][1] = nums[i];
+            idx++;
+        }
+    }
+  // Return the dotProduct of two sparse vectors
+    public int dotProduct(SparseVector vec) {
+        int i = 0, j = 0, res = 0;
+        while(i < sparse.length && j < vec.sparse.length) {
+            if(sparse[i][0] < vec.sparse[j][0]) {
+                i++;
+            } else if (sparse[i][0] > vec.sparse[j][0]) {
+                j++;
+            } else {
+                res += sparse[i][1]*vec.sparse[j][1];
+                i++; j++;
+            }
+        }
+        return res;
+    }
+}
+
+// Your SparseVector object will be instantiated and called as such:
+// SparseVector v1 = new SparseVector(nums1);
+// SparseVector v2 = new SparseVector(nums2);
+// int ans = v1.dotProduct(v2);
