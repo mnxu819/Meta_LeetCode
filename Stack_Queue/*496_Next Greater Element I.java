@@ -25,3 +25,21 @@ class Solution {
         return nums1;
     }
 }
+/***************having a loop****************/
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int[] res = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();// record the index
+        for (int i = 2*nums.length-1; i >= 0; i--) {
+            while (!stack.isEmpty() && nums[stack.peek()] <= nums[i%nums.length]) {
+                stack.pop();
+            }
+            res[i%nums.length] = stack.empty() ? -1 : nums[stack.peek()];
+            stack.push(i % nums.length);
+        }
+        return res;
+    }
+}
+/***************find smallest next greater number****************/
+find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
+Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.
