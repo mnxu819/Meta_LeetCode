@@ -43,3 +43,41 @@ class Solution {
 /***************find smallest next greater number****************/
 find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
 Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.
+class Solution {
+    public int nextGreaterElement(int n) {
+        char[] nums = (""+n).toCharArray();
+        int i = nums.length-2;
+        while (i >= 0 && nums[i] >= nums[i+1]) {
+            i--;
+        }
+        if (i<0) {
+            return -1;
+        } else {
+            for (int j = nums.length-1; j > i; j--) {
+                if (nums[j] > nums[i]) {
+                    swap(i, j, nums);
+                    reverse(i+1, nums);
+                    break;
+                }
+            }
+        }
+        long val = Long.parseLong(new String(nums));
+        return (val <= Integer.MAX_VALUE) ? (int) val : -1;
+    }
+    public void swap(int i, int j, char[] nums) {
+        char tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    } 
+    public void reverse(int i, char[] nums) {
+        int start = i;
+        int end = nums.length-1;
+        while (start <= end){
+            char tmp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = tmp;
+            start++;
+            end--;
+        }
+    }
+}
