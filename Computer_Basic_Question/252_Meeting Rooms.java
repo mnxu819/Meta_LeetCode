@@ -37,19 +37,17 @@ public class Solution {
     public int minMeetingRooms(List<Interval> intervals) {
         // Write your code here
         if (intervals == null || intervals.size()  == 0) return 0;
-        Collections.sort(intervals, new Comparator<Interval>(){
-            public int compare(Interval o1, Interval o2) {
-                return o1.start != o2.start ? o1.start - o2.start : o1.end-o2.end;
-            }
+        Collections.sort(intervals, (o1, o2)->{
+            return o1.start != o2.start ? o1.start - o2.start : o1.end-o2.end;
         });
         int room = 0;
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < intervals.size(); i++) {
             pq.offer(intervals.get(i).end);
-            if (intervals.get(i).start < pq.peek()) {//always compare with min end time
+            if (intervals.get(i).start < pq.peek()) {//pq总能peek出最短的时间，比较start，如果有重叠加一个room
                 room++;
             } else {
-                pq.poll();
+                pq.poll();//如果和min end time不重叠，这样把min end time pop出来
             }
             
         }
