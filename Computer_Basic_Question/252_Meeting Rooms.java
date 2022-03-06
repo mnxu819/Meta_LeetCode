@@ -45,8 +45,8 @@ public class Solution {
         int room = 0;
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < intervals.size(); i++) {
-            pq.offer(intervals.get(i).end);//automatic sort the end time
-            if (intervals.get(i).start < pq.peek()) {
+            pq.offer(intervals.get(i).end);
+            if (intervals.get(i).start < pq.peek()) {//always compare with min end time
                 room++;
             } else {
                 pq.poll();
