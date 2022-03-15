@@ -29,8 +29,12 @@ class Solution {
         }
         cur = head;
         while (cur != null) {
-            map.get(cur).next = map.get(cur.next);
-            map.get(cur).random = map.get(cur.random);
+            if (cur.next != null) {
+                map.get(cur).next = map.get(cur.next);
+            }
+            if (cur.random != null) {
+                map.get(cur).random = map.get(cur.random);
+            }
             cur = cur.next;
         }
         return map.get(head);
